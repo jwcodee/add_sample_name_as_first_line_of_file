@@ -1,0 +1,33 @@
+<tool id="my_addName" name="Add sample name as first line" version="0.1.0">
+  <description>to an existing tabular file</description>
+  <command interpreter="python">add_sample_name_as_first_line.py 
+    --input "$input" 
+    --sample "$input2.element_identifier" 
+    --output "$output"
+  </command>
+  <inputs>
+  <param format="tabular" name="input" type="data" label="to Dataset"  />
+  <param name="input2" format="data" type="data" label="sample"  />
+  </inputs>
+  <outputs>
+    <data name="output" format="tabular" />
+  </outputs>
+
+  <tests>
+    <test>
+      <param name="input" value="test.tab" ftype="tabular" />
+      <param name="input2" value="ABC_1.fastq.gz" />
+      <output name="output" file="test_with_header.tab" ftype="tabular"/>
+    </test>
+  </tests>
+  <help>
+**What it does**
+
+Adds a new line with the name of the sample file and removing [_12].fastq.gz from the name if there is match to the pattern.
+Written by Johnathan Kwan Long Wong, johnathanwong4@gmail.com
+  </help>
+  <citations>
+    <citation type="bibtex">@UNPUBLISHED{Johnathan2018,
+      author = "Johnathan W"}</citation>
+  </citations>
+</tool>
