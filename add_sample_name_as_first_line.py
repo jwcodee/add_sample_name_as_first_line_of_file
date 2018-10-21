@@ -3,16 +3,21 @@ import argparse
 import re
 
 def Parser():
-  the_parser = argparse.ArgumentParser(description="add sample name as first line of a tab file")
-  the_parser.add_argument('--input', required=True, action="store", type=str, help="input tab file")
-  the_parser.add_argument('--output', required=True,  action="store", type=str, help="output file")
-  the_parser.add_argument('--sample', required=True, action="store", type=str, help="sample name to add as the first line of input file")
+  the_parser = argparse.ArgumentParser(description="add label to first line of file")
+  the_parser.add_argument('--input', required=True, action="store", type=str, help="input file")
+  the_parser.add_argument('--output', required=True,  action="store", type=str, help="output file path")
+  the_parser.add_argument('--label', required=True, action="store", type=str, help="label to add in the first line")
   args = the_parser.parse_args()
   return args
 
 args=Parser()
+#input=open(args.input)
+#output=open(args.output, 'w')
 
-sample_name = re.sub('[_12]*.fastq.gz', '', args.sample.rstrip().lstrip())
+#print >> output, args.label
+#print >> output, input
+
+sample_name = re.sub('(_1.fastq.gz|_2.fastq.gz|.fastq.gz)', '', args.label.rstrip().lstrip())
 
 with open(args.input) as input:
 	with open(args.output, 'w') as output:
@@ -20,4 +25,5 @@ with open(args.input) as input:
 		for line in input:
 			output.write(line)
 
-
+#input.close()
+#output.close()
